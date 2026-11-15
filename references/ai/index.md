@@ -18,6 +18,7 @@
 - [エージェントを用いた E2E テストを良くする 5 つのヒント](e2e-5-tips-for-writing-good-agentic-tests.md) - e2e ブログの記事「5 Tips for Writing Good Agentic Tests with e2e」の要約で、AI エージェントによる E2E テストを壊れにくくデバッグしやすく保つ 5 つの設計原則を説明する。
 - [モデルと働く人間のための「もっと野心的になる」方法](felixrieseberg-how-to-be-more-ambitious.md) - Felix Rieseberg の記事「How to be more ambitious: A tutorial for humans with models」の要約で、AI モデルへの頼み方を Altitude・Depth・Range の 3 方向に広げる方法を説明する。
 - [LearnHarness: 状態機械と DAG で能動的学習を強制する AI チューターハーネス](github-amosblomqvist-learnharness.md) - Eero Alvar Amos Blomqvist の GitHub リポジトリ「amosblomqvist/learnharness」の要約で、自由対話ではなく決定論的な状態機械と DAG カリキュラムで難解な主題を教えるローカルファーストのハーネス設計をまとめる。
+- [Tencent WeKnora: ハイブリッド RAG・ReAct エージェント・自動 Wiki を統合したナレッジ基盤](github-tencent-weknora.md) - Tencent のオープンソースナレッジ基盤「WeKnora」の要約で、ハイブリッド検索・自律エージェント・自動 Wiki 構築の 3 機能とローカル完結・通信制御の構成をまとめる。
 - [Harness² の要約](google-research-harness2.md) - Google Research が公開した、エージェントのハーネスを再帰的に改良するフレームワーク Harness²（google-research/harness2）の要約。
 - [エージェントの各ステップを見張らずに済ませるループとグラフ](hanakoxbt-loops-and-graphs.md) - Hanako（@hanakoxbt）の X 記事「Loops and Graphs」の要約で、作業単位を正しくするループと作業の形を決めるグラフを分け、人間の承認を最後の 1 ステップだけにする設計を説明する。
 - [評価駆動開発 (EDD) とは何か: AI エージェントを継続的に改善する手法](langchain-blog-what-is-eval-driven-development.md) - LangChain ブログの記事「What Is Eval-Driven Development? How to Improve AI Agents」の要約で、感覚的な確認に頼らず評価データセットと実験比較を軸にエージェントを開発する 3 段階のサイクルを説明する。
