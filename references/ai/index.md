@@ -1,15 +1,29 @@
 # AI・エージェント
 
+- [0xarcos による Claude Code の自動検証フックと Failure Ratchet](0xarcos-claude-code-failure-ratchet.md) - Ariel Arcos (@0xarcos) の X 投稿および公開知見の要約で、Claude Code のフック機能と失敗台帳 (Failure Ratchet) を用いてエージェントの失敗を再発防止ルールへ変える仕組みを説明する。
 - [AI エージェントに好かれるコードベースの作り方](aihero-codebases-ai-agents-love.md) - Matt Pocock の記事「How To Make Codebases AI Agents Love」の要約。Deep Module でコードベースを AI が辿りやすく検証しやすい形にする考え方。
+- [Attio のエージェント時代に向けた CRM アーキテクチャ](attio-architecture-agentic-revenue.md) - Attio のアーキテクチャ解説ページ「The architecture for agentic revenue」の要約で、人間と AI エージェントの双方に最適化されたハイブリッド CRM データ基盤の 5 つの柱を説明する。
+- [エージェントの失敗をどの層で直すか: ハーネス・ループ・グラフの切り分け](beamnxw-agent-harness-loop-graph-engineering.md) - beamnxw (@beamnxw) のエージェント設計論の要約で、AI エージェントの失敗原因をハーネス層・ループ層・グラフ層の 3 層に切り分けて修正する設計フレームワークを説明する。
 - [効果的なエージェント自動化の作り方](claude-blog-building-effective-agent-automations.md) - Claude ブログの記事「Building effective agent automations」の要約で、定期実行で情報源を読み、前回からの変化をまとめて投稿するエージェントを Claude Managed Agents で作るときの失敗パターンと対策をまとめる。
 - [Claude Code チームのコードレビューの進め方](claude-blog-claude-code-team-code-review.md) - claude.dev ブログの記事「How the Claude Code team does code review」の要約で、エージェントがコードの大半を書く状況において、人の時間を節約しつつ差し戻しを増やさないレビューの仕組みを説明する。
+- [どの Claude モデルで開発すべきか: Fable・Opus・Sonnet・Haiku の使い分け](claude-blog-which-claude-model-should-you-build-with.md) - claude.dev ブログの記事「Which Claude model should you build with? Fable, Opus, Sonnet, or Haiku」の要約で、4 つの Claude モデルの性能・料金・完了タスクあたりのコストと組み合わせ方を整理する。
 - [コンテキストエンジニアリング: メモリ・コンパクション・ツール結果のクリア](claude-cookbook-context-engineering-tools.md) - Claude Cookbook の「Context engineering: memory, compaction, and tool clearing」の要約で、長く動くエージェントのコンテキストを抑える 3 つの手段の違いと使い分けをまとめる。
 - [Claude Managed Agents のドリーム（Dreams）](claude-docs-managed-agents-dreams.md) - 過去のセッションからメモリストアを整理・再構築する Managed Agents のドリーム機能の要約。
 - [Claude Managed Agents の概要](claude-docs-managed-agents-overview.md) - Anthropic が提供するエージェント実行基盤 Claude Managed Agents の概要。
 - [長時間動くエージェントのための効果的なハーネス](claude-engineering-effective-harnesses-for-long-running-agents.md) - Anthropic のエンジニアリングブログの記事「Effective harnesses for long-running agents」の要約で、記憶を持たないセッションをまたいでエージェントに開発を続けさせるための、初期化エージェントとコーディングエージェントの 2 段構成と、状態を引き継ぐファイルを説明する。
 - [autonomous-coding のコーディング用プロンプト](claude-quickstarts-autonomous-coding-coding-prompt.md) - claude-quickstarts の autonomous-coding で、2 回目以降の毎セッションに送るプロンプト coding_prompt.md の要約で、記憶のない状態から状況をつかみ、1 機能を実装してブラウザで確かめ、きれいな状態で終えるまでの 10 段階の手順と、その書き方の工夫を説明する。
 - [autonomous-coding の要約](claude-quickstarts-autonomous-coding.md) - Anthropic の claude-quickstarts リポジトリにある autonomous-coding の要約で、初期化エージェントとコーディングエージェントの 2 段構成で、何セッションもかけてアプリを作らせる最小のハーネスの仕組みと、Bash コマンドを許可リストで絞る安全対策を説明する。
+- [常時稼働エージェントの作り方: 5 つの基本部品](claude-resources-building-always-on-agents.md) - Anthropic の記事「常時稼働エージェントの構築 (Building always-on agents)」の要約で、複数セッションにまたがって無人で動き続けるエージェントを支える 5 つのインフラ部品を説明する。
+- [AI ネイティブ SDLC プレイブック: 6 つのステージと成果物駆動の開発サイクル](claude-resources-the-ai-native-sdlc-playbook.md) - Anthropic の記事「The AI-Native SDLC Playbook」の要約で、コード実装が最速になった時代に開発ライフサイクルの 6 段階をバージョン管理された Markdown 成果物でつなぐ実践手法をまとめる。
+- [エージェントを用いた E2E テストを良くする 5 つのヒント](e2e-5-tips-for-writing-good-agentic-tests.md) - e2e ブログの記事「5 Tips for Writing Good Agentic Tests with e2e」の要約で、AI エージェントによる E2E テストを壊れにくくデバッグしやすく保つ 5 つの設計原則を説明する。
 - [モデルと働く人間のための「もっと野心的になる」方法](felixrieseberg-how-to-be-more-ambitious.md) - Felix Rieseberg の記事「How to be more ambitious: A tutorial for humans with models」の要約で、AI モデルへの頼み方を Altitude・Depth・Range の 3 方向に広げる方法を説明する。
+- [LearnHarness: 状態機械と DAG で能動的学習を強制する AI チューターハーネス](github-amosblomqvist-learnharness.md) - Eero Alvar Amos Blomqvist の GitHub リポジトリ「amosblomqvist/learnharness」の要約で、自由対話ではなく決定論的な状態機械と DAG カリキュラムで難解な主題を教えるローカルファーストのハーネス設計をまとめる。
 - [Harness² の要約](google-research-harness2.md) - Google Research が公開した、エージェントのハーネスを再帰的に改良するフレームワーク Harness²（google-research/harness2）の要約。
 - [エージェントの各ステップを見張らずに済ませるループとグラフ](hanakoxbt-loops-and-graphs.md) - Hanako（@hanakoxbt）の X 記事「Loops and Graphs」の要約で、作業単位を正しくするループと作業の形を決めるグラフを分け、人間の承認を最後の 1 ステップだけにする設計を説明する。
+- [評価駆動開発 (EDD) とは何か: AI エージェントを継続的に改善する手法](langchain-blog-what-is-eval-driven-development.md) - LangChain ブログの記事「What Is Eval-Driven Development? How to Improve AI Agents」の要約で、感覚的な確認に頼らず評価データセットと実験比較を軸にエージェントを開発する 3 段階のサイクルを説明する。
+- [Copilot Cowork の開発から得た 6 つの教訓と稼働中の Python から Rust への移行](microsoft-commandline-copilot-cowork-python-to-rust.md) - Microsoft Command Line ブログの記事「Nine engineers, 1,211 pull requests in a day: Lessons from building Copilot Cowork」の要約で、エージェント駆動開発の 6 原則と本番ランタイムの Rust 移行手法を説明する。
+- [atomRDF: 原子スケール計算材料科学のためのオントロジー基盤ナレッジグラフ](pyscal-atomrdf-overview.md) - atomRDF 公式ドキュメントの要約で、計算材料科学の原子構造とシミュレーションワークフローを OCDO オントロジーと RDF グラフで構造化・クエリする Python ライブラリの仕組みをまとめる。
+- [PR の 60% を自動承認・自動マージするにはどうすればよいか](swizec-auto-approve-and-merge-60p-of-prs.md) - Swizec Teller の記事「How do we auto-approve and merge 60% of PRs?」の要約で、自動マージ率を 15% から 60% へ引き上げるためのスマートなリスク分類と実装前後のレビュー移行を説明する。
+- [国内企業の AI × ナレッジグラフ活用事例: 因果推論と実装パターン](zenn-kg-japan-case-studies.md) - Zenn の記事「国内企業の AI × ナレッジグラフ活用事例 因果推論と実装から学ぶ」の要約で、富士通・ストックマーク・NEC などの AI 連携事例と従来型グラフ DB 事例から共通する実装パターンを整理する。
+- [Claude Code でハーネスエンジニアリングを実践する 5 層の設計パターン](zenn-sasadango28-claude-code-harness-engineering.md) - sasadango28 氏の Zenn 記事「Claude Codeでハーネスエンジニアリングを実践する — 5層の設計パターン」の要約で、CLAUDE.md から Settings までの 5 層構造で AI の行動を制御する設計をまとめる。
 - [Claude Opus 5.5 を最小コストで最大品質に使う設定ガイド](zodchiii-claude-opus-5-5-setup-guide.md) - darkzodchi（@zodchiii）の X 記事「The Claude Opus 5.5 Setup Guide」の要約で、Opus 5 からの移行で費用を増やさないための effort・キャッシュ・API 変更点・プロンプトの設定をまとめる。
