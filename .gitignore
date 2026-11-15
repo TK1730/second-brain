@@ -1,0 +1,9 @@
+# Local harness outputs & temporary files
+.local/
+__pycache__/
+*.py[cod]
+
+# OS / Editor
+*~
+.DS_Store
+Thumbs.db
