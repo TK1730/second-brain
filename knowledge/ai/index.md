@@ -1,9 +1,36 @@
 # AI の使い方
 
+- [エージェントのメモリを層で設計し、dreaming で整理する](agent-memory-components.md) - Anthropic のエンジニアリング記事に基づく、エージェントメモリの 4 層構成、dreaming、評価結果、設計上の指針の要点。
+- [Asana に学ぶ、指導できるエージェントの設計](asana-human-agent-teams.md) - Asana が人とエージェントの協働で守る 4 つの設計原則と、社内での 3 つの活用例の要点。
+- [Claude Code のクラウドセッションを使い分ける](claude-code-cloud-sessions.md) - Claude Code のクラウドセッションの始め方、環境設定、GitHub 連携、ルーティン、制限事項と運用の習慣。
+- [Google Cloud 上の Claude Code の費用を管理し ROI を示す](claude-code-cost-roi-google-cloud.md) - 管理、追跡、証明の 3 つの観点から、Google Cloud 上の Claude Code の費用統制と効果測定を進める手順の要点。
+- [Claude Code の effort を作業の難しさに合わせて使い分ける](claude-code-effort-levels.md) - Claude Code の effort 設定の意味、レベル別の使いどころ、Terminal-Bench 3.0 での効果と限界の要点。
+- [Claude Code のモッドで何ができるか、チームでどう管理するか](claude-code-mods-overview.md) - Claude Code のモッドの概要、できること、チーム導入時の管理方法、セキュリティ上の注意点、始め方の要点。
+- [Claude Code のモッドで画面と動作を拡張する](claude-code-mods.md) - Claude Code のモッド（セッション内で動く小さなスクリプト）の構造、作り方、検証、共有方法と安全面の注意点。
+- [Claude Code チームのコードレビューを 7 層で設計する](claude-code-team-code-review.md) - AI が大量にコードを書く環境で、検証、AI レビュー、リスク別の人の承認、段階的リリースを重ねるレビュー設計の要点。
+- [Claude Dashboards と Motion でデータの可視化と説明動画を作る](claude-dashboards-and-motion.md) - Claude Dashboards と Motion（いずれもベータ）の使い方、連携先、管理者設定、Claude Design 移行時の注意点。
+- [Claude による電子機器プロトタイプ設計の範囲と限界](claude-electronics-design.md) - Claude が回路基板、筐体、ファームウェアまで一貫して設計した実験の工程、数値、未検証の範囲の要点。
+- [Claude for Financial Advisors で面談の準備と記録を任せる](claude-for-financial-advisors.md) - Claude for Financial Advisors の接続先、8 つのスキル、人の承認を前提とした運用、導入時の注意点の要点。
 - [Claude for Manufacturing で現場の下書き作業を任せる](claude-for-manufacturing.md) - Claude for Manufacturing プラグインのスキル、コネクタ、人が確認する設計、利用開始の手順の要点。
+- [Claude for Nonprofits プラグインで非営利団体の業務を支える](claude-for-nonprofits.md) - Claude for Nonprofits プラグインのスキル、割引、コネクタ、データの扱い、利用開始の手順の要点。
+- [Managed Agents で問い合わせ対応を購入まで任せる](claude-managed-agents-inbound-sales.md) - Anthropic の営業チームが Managed Agents で作った購入支援エージェントの構成、運用、教訓、自己申告の成果。
+- [Claude Marketplace で Anthropic の契約額を他社ツールに充てる](claude-marketplace-commitment.md) - Anthropic との契約の一部を Snowflake や Vercel など他社ツールの購入に回す仕組み、事例、条件の要点。
 - [Claude Meetings（ベータ）を会議で使う](claude-meetings.md) - Claude をビデオ会議の参加者として使う Claude Meetings の機能、会議中の頼み方、プライバシーと管理者設定、提供条件と料金の要点。
+- [Claude の Personal Finance で自分の口座データをもとに相談する](claude-personal-finance.md) - Claude の Personal Finance（ベータ）でできること、接続方法、読み取り専用の範囲、プライバシーと利用条件の要点。
+- [Claude ディレクトリへのプラグイン提出ポータルを使う](claude-plugin-submission-portal.md) - プラグインの構成要素、2 つの提出経路、審査の流れ、公開後の分析、MCP 拡張の要点。
+- [Claude Security で継続スキャンと修正の追跡を運用する](claude-security-continuous-scanning.md) - Claude Security の継続監視、修正の自動追跡、脅威モデル、API 連携、公開ベータの条件と注意点の要点。
 - [Claude Tag をスタートアップで使い始める](claude-tag-for-startups.md) - Slack で Claude にメンションして作業を任せる Claude Tag の、導入先チャンネルの 5 つの型、導入手順、提供条件の要点。
+- [AI 主導のコード近代化プロジェクトを 6 段階で準備する](code-modernization-preparation.md) - 近代化の種類の選択、証明条件（certificate）、昇格ポリシー、前提条件、ワークフロー、実行、コスト見積もりの要点。
+- [Code Review の一般提供で PR レビューを自動化する](code-review-generally-available.md) - Claude Code の Code Review の一般提供、レビューの深さ 3 段階、有効化の手順、Enterprise 向けクレジットの要点。
+- [Curative の事例に学ぶ、契約業務を Claude エージェントに任せる設計](curative-provider-network-agents.md) - 医療保険の Curative が全国の提供者ネットワークを作るために組んだエージェント構成、設計上の判断、人の確認点、自己申告の数値。
+- [Claude Code で評価の設計と改善の反復を自動化する](eval-design-and-hillclimbing.md) - claude-api スキルの build-eval と hillclimb で、評価を作り、過学習を避けて性能やコストを改善する手順と数値例。
+- [サブエージェントをメインのエージェントループへ統合する判断と手順](folding-subagents-into-main-agent.md) - サブエージェントを残す条件、スキルとツールへの置き換え、評価を使った段階的な統合手順の要点。
+- [LLM による形式検証を大規模に使う手順と注意点](llm-formal-verification.md) - Claude にファズテストから仕様と証明を書かせる形式検証の手順、規模、限界、報酬ハッキング対策の要点。
+- [Managed Agents と NVIDIA OpenShell でエージェントの実行環境を締める](managed-agents-nvidia-openshell.md) - Claude Managed Agents の自己ホスト型サンドボックスと NVIDIA OpenShell による、エージェント実行の統制方針の要点。
 - [Opus 5.5 をナレッジワークの日常モデルとして使う](opus-5-5-knowledge-work.md) - Claude Opus 5.5 を調査・分析・文書作成の既定モデルにするための、モデルの使い分け、effort の決め方、依頼の仕方の指針。
+- [Opus 5.5 で長いコーディングセッションのコストを抑える](opus-5-5-long-context-coding.md) - Opus 5.5 の価格改定、Claude Code のキャッシュ改善、長いセッションで取るべき運用の要点。
+- [Opus 5.5 で 1 タスクにかかる費用を見積もり、測る](opus-5-5-task-cost.md) - タスク費用を決める 4 要因、Opus 5.5 の価格、effort とモデル階層の選び方、キャッシュの扱い、計測手順の要点。
+- [Anthropic が自社のソース管理を作り直した理由](redesigning-source-control.md) - エージェント規模のマージ量で git が限界を迎え、常時接続を前提にした Scion を作った経緯、設計原則、教訓、適用範囲の要点。
 - [規制産業で Claude Code を全社展開するときの統制の作り方](regulated-firm-claude-code-rollout.md) - JPMorganChase の事例から、管理された環境での実行、認証情報の隔離、段階的な権限拡大、自動ゲートによる変更統制を整理する。
 - [Claude Managed Agents を自社環境で運用する](self-hosted-managed-agents.md) - Self-hosted Claude Managed Agents の構成、モデルリクエストの送信先、無人エージェントを守る 4 つのセキュリティ原則、利用開始の条件。
 - [スタイリスト AI の事例に学ぶ、モデルの分業と回答範囲の固定](style-advisor-model-split.md) - J.Crew の Style Advisor の事例から、計画・試作・本番でモデルを分ける構成と、社内の専門知に回答範囲を固定する設計を整理する。
