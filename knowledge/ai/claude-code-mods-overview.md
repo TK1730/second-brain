@@ -76,5 +76,6 @@ Anthropic は、今後も組み込み機能をモッドへ移し、Claude Code �
 ## See also
 
 - [Claude Code のモッドで画面と動作を拡張する](/knowledge/ai/claude-code-mods.md)
+- [Claude Code のモッドの権限と管理者設定](/knowledge/ai/claude-code-mods-security-admin.md)
 
 [^claude-article]: [Customize Claude Code with mods](https://claude.com/ja/resources/articles/claude-code-mods)（2026-10-01）

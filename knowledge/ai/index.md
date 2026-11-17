@@ -6,6 +6,7 @@
 - [Google Cloud 上の Claude Code の費用を管理し ROI を示す](claude-code-cost-roi-google-cloud.md) - 管理、追跡、証明の 3 つの観点から、Google Cloud 上の Claude Code の費用統制と効果測定を進める手順の要点。
 - [Claude Code の effort を作業の難しさに合わせて使い分ける](claude-code-effort-levels.md) - Claude Code の effort 設定の意味、レベル別の使いどころ、Terminal-Bench 3.0 での効果と限界の要点。
 - [Claude Code のモッドで何ができるか、チームでどう管理するか](claude-code-mods-overview.md) - Claude Code のモッドの概要、できること、チーム導入時の管理方法、セキュリティ上の注意点、始め方の要点。
+- [Claude Code のモッドの権限と管理者設定](claude-code-mods-security-admin.md) - モッドが持つ権限の範囲（ファイル、プロセス、HTTP）、権限ルールとの関係、sec-default と管理者設定、導入前の確認事項。
 - [Claude Code のモッドで画面と動作を拡張する](claude-code-mods.md) - Claude Code のモッド（セッション内で動く小さなスクリプト）の構造、作り方、検証、共有方法と安全面の注意点。
 - [Claude Code チームのコードレビューを 7 層で設計する](claude-code-team-code-review.md) - AI が大量にコードを書く環境で、検証、AI レビュー、リスク別の人の承認、段階的リリースを重ねるレビュー設計の要点。
 - [Claude Dashboards と Motion でデータの可視化と説明動画を作る](claude-dashboards-and-motion.md) - Claude Dashboards と Motion（いずれもベータ）の使い方、連携先、管理者設定、Claude Design 移行時の注意点。
