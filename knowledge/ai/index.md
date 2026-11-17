@@ -24,10 +24,14 @@
 - [AI 主導のコード近代化プロジェクトを 6 段階で準備する](code-modernization-preparation.md) - 近代化の種類の選択、証明条件（certificate）、昇格ポリシー、前提条件、ワークフロー、実行、コスト見積もりの要点。
 - [Code Review の一般提供で PR レビューを自動化する](code-review-generally-available.md) - Claude Code の Code Review の一般提供、レビューの深さ 3 段階、有効化の手順、Enterprise 向けクレジットの要点。
 - [Curative の事例に学ぶ、契約業務を Claude エージェントに任せる設計](curative-provider-network-agents.md) - 医療保険の Curative が全国の提供者ネットワークを作るために組んだエージェント構成、設計上の判断、人の確認点、自己申告の数値。
+- [Claude Code の動的ワークフローで大規模タスクを並列に検証しながら進める](dynamic-workflows.md) - 動的ワークフローの仕組み、並列サブエージェントと反証ループ、使いどころ、提供範囲、上限と費用の要点。
 - [Claude Code で評価の設計と改善の反復を自動化する](eval-design-and-hillclimbing.md) - claude-api スキルの build-eval と hillclimb で、評価を作り、過学習を避けて性能やコストを改善する手順と数値例。
 - [サブエージェントをメインのエージェントループへ統合する判断と手順](folding-subagents-into-main-agent.md) - サブエージェントを残す条件、スキルとツールへの置き換え、評価を使った段階的な統合手順の要点。
+- [Claude で文章から知識グラフを構築するパイプライン](knowledge-graph-construction.md) - 抽出、関係の取得、名寄せ、複数ホップの問い合わせという流れと、モデル分担、評価、拡張時の注意点の要点。
+- [Claude Code で大規模コード移行を進める 6 段階](large-scale-code-migration.md) - Anthropic の大規模移行の進め方。judge の用意、依存関係マップ、並列エージェント、機械的な検証、人が判断する箇所、自己申告の数値。
 - [LLM による形式検証を大規模に使う手順と注意点](llm-formal-verification.md) - Claude にファズテストから仕様と証明を書かせる形式検証の手順、規模、限界、報酬ハッキング対策の要点。
 - [Managed Agents と NVIDIA OpenShell でエージェントの実行環境を締める](managed-agents-nvidia-openshell.md) - Claude Managed Agents の自己ホスト型サンドボックスと NVIDIA OpenShell による、エージェント実行の統制方針の要点。
+- [マルチエージェントの 5 つの協調パターンと選び方](multi-agent-coordination-patterns.md) - generator-verifier、orchestrator-subagent、agent teams、message bus、shared state の使いどころ、弱点、選択の指針。
 - [Opus 5.5 をナレッジワークの日常モデルとして使う](opus-5-5-knowledge-work.md) - Claude Opus 5.5 を調査・分析・文書作成の既定モデルにするための、モデルの使い分け、effort の決め方、依頼の仕方の指針。
 - [Opus 5.5 で長いコーディングセッションのコストを抑える](opus-5-5-long-context-coding.md) - Opus 5.5 の価格改定、Claude Code のキャッシュ改善、長いセッションで取るべき運用の要点。
 - [Opus 5.5 で 1 タスクにかかる費用を見積もり、測る](opus-5-5-task-cost.md) - タスク費用を決める 4 要因、Opus 5.5 の価格、effort とモデル階層の選び方、キャッシュの扱い、計測手順の要点。
