@@ -172,6 +172,11 @@ def main() -> int:
     parser.add_argument("-o", "--output", type=Path, default=Path("radar.html"))
     parser.add_argument("--volume", default="35")
     parser.add_argument("--date", default="2026-11")
+    parser.add_argument(
+        "--standalone",
+        action="store_true",
+        help="ブラウザーで直接開くファイルとして、doctype と文字コードの指定を付ける (アーティファクトとして公開するときは付けない)",
+    )
     args = parser.parse_args()
 
     labels = {r: r.capitalize() for r in RINGS}
@@ -209,6 +214,12 @@ def main() -> int:
     if "/*__RADAR_DATA__*/null" not in template:
         sys.exit("テンプレートにデータの差し込み位置が無い")
     html = template.replace("/*__RADAR_DATA__*/null", payload).replace("__VOLUME__", args.volume)
+    if args.standalone:
+        html = (
+            '<!doctype html>\n<html lang="ja">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+            "</head>\n<body>\n" + html + "\n</body>\n</html>\n"
+        )
     args.output.write_text(html, encoding="utf-8")
     print(f"{args.output}: {len(blips)} 項目、{len(html.encode('utf-8')) // 1024} KB")
     return 0
