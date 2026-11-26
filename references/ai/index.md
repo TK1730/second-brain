@@ -25,6 +25,7 @@
 - [Copilot Cowork の開発から得た 6 つの教訓と稼働中の Python から Rust への移行](microsoft-commandline-copilot-cowork-python-to-rust.md) - Microsoft Command Line ブログの記事「Nine engineers, 1,211 pull requests in a day: Lessons from building Copilot Cowork」の要約で、エージェント駆動開発の 6 原則と本番ランタイムの Rust 移行手法を説明する。
 - [atomRDF: 原子スケール計算材料科学のためのオントロジー基盤ナレッジグラフ](pyscal-atomrdf-overview.md) - atomRDF 公式ドキュメントの要約で、計算材料科学の原子構造とシミュレーションワークフローを OCDO オントロジーと RDF グラフで構造化・クエリする Python ライブラリの仕組みをまとめる。
 - [PR の 60% を自動承認・自動マージするにはどうすればよいか](swizec-auto-approve-and-merge-60p-of-prs.md) - Swizec Teller の記事「How do we auto-approve and merge 60% of PRs?」の要約で、自動マージ率を 15% から 60% へ引き上げるためのスマートなリスク分類と実装前後のレビュー移行を説明する。
+- [Thoughtworks Technology Radar Vol.35](thoughtworks-technology-radar-vol-35/) - Thoughtworks Technology Radar Vol.35 (2026 年 11 月) の要約で、全体像と 4 つのテーマ、および Techniques・Platforms・Tools・Languages and frameworks の 4 象限 117 項目を象限ごとの文書にまとめる。
 - [国内企業の AI × ナレッジグラフ活用事例: 因果推論と実装パターン](zenn-kg-japan-case-studies.md) - Zenn の記事「国内企業の AI × ナレッジグラフ活用事例 因果推論と実装から学ぶ」の要約で、富士通・ストックマーク・NEC などの AI 連携事例と従来型グラフ DB 事例から共通する実装パターンを整理する。
 - [Claude Code でハーネスエンジニアリングを実践する 5 層の設計パターン](zenn-sasadango28-claude-code-harness-engineering.md) - sasadango28 氏の Zenn 記事「Claude Codeでハーネスエンジニアリングを実践する — 5層の設計パターン」の要約で、CLAUDE.md から Settings までの 5 層構造で AI の行動を制御する設計をまとめる。
 - [Claude Opus 5.5 を最小コストで最大品質に使う設定ガイド](zodchiii-claude-opus-5-5-setup-guide.md) - darkzodchi（@zodchiii）の X 記事「The Claude Opus 5.5 Setup Guide」の要約で、Opus 5 からの移行で費用を増やさないための effort・キャッシュ・API 変更点・プロンプトの設定をまとめる。
