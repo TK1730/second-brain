@@ -1,0 +1,355 @@
+<title>Technology Radar Vol.__VOLUME__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* 配置: 上に見出しと絞り込み、左にレーダー、右に選んだ項目の要約、下に気になる項目の一覧 */
+:root {
+  --bg: #f6f7f5; --surface: #ffffff; --fg: #1d2421; --muted: #66706b; --line: #dde2de; --soft: #eef1ee;
+  --q-techniques: #24786f; --q-platforms: #3c5ea8; --q-tools: #8a5a14; --q-languages-and-frameworks: #7b4a9b;
+  --mark: #e0710b; --mark-soft: #fdebd9; --focus: #1d2421;
+  --font-body: "IBM Plex Sans JP", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121614; --surface: #1a201d; --fg: #e6ebe8; --muted: #9aa59f; --line: #2d3531; --soft: #222925;
+  --q-techniques: #4fb3a8; --q-platforms: #7f9be0; --q-tools: #d39a46; --q-languages-and-frameworks: #b58bd6;
+  --mark: #ff9a3d; --mark-soft: #3a2a19; --focus: #e6ebe8; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #121614; --surface: #1a201d; --fg: #e6ebe8; --muted: #9aa59f; --line: #2d3531; --soft: #222925;
+  --q-techniques: #4fb3a8; --q-platforms: #7f9be0; --q-tools: #d39a46; --q-languages-and-frameworks: #b58bd6;
+  --mark: #ff9a3d; --mark-soft: #3a2a19; --focus: #e6ebe8; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 18px; }
+h1, h2 { margin: 0; text-wrap: balance; }
+h1 { font-size: 1.55rem; font-weight: 700; letter-spacing: .01em; }
+h2 { font-size: 1.05rem; font-weight: 700; }
+.top { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: end; justify-content: space-between; }
+.top p { margin: 2px 0 0; color: var(--muted); font-size: .85rem; }
+.sync { font-size: .8rem; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; background: var(--surface); }
+.sync[data-state="synced"] { color: var(--q-techniques); border-color: currentColor; }
+.sync[data-state="warn"] { color: var(--mark); border-color: currentColor; }
+
+.filters { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.row .label { font-size: .75rem; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; min-width: 4.5em; }
+.chip { font: inherit; font-size: .82rem; padding: 3px 11px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip.star-only[aria-pressed="true"] { background: var(--mark); border-color: var(--mark); color: #fff; }
+.chip .sw { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+.search { flex: 1 1 220px; min-width: 0; font: inherit; font-size: .9rem; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
+.count { margin-left: auto; font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+button:focus-visible, .search:focus-visible, .blip:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.radar-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px; }
+#radar { display: block; width: 100%; height: auto; max-width: 100%; }
+#radar .ring { fill: none; stroke: var(--line); stroke-width: 1.5; }
+#radar .axis { stroke: var(--line); stroke-width: 1.5; }
+#radar .sector { opacity: .06; }
+#radar .ring-label { fill: var(--muted); font: 600 15px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+#radar .q-label { font: 700 19px var(--font-body); }
+.blip { cursor: pointer; }
+.blip circle { stroke: var(--surface); stroke-width: 2; transition: r .12s; }
+.blip text { fill: #fff; font: 600 10.5px var(--font-mono); pointer-events: none; }
+.blip.marked circle { fill: var(--mark); }
+.blip.selected circle { stroke: var(--fg); stroke-width: 3.5; r: 15px; }
+.blip.dim { opacity: .16; }
+.blip:hover circle { r: 14px; }
+@media (prefers-reduced-motion: reduce) { .blip circle { transition: none; } }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; min-width: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+@media (max-width: 860px) { .panel { position: static; } }
+.panel .head { display: flex; gap: 10px; align-items: start; }
+.panel .num { font: 600 .95rem var(--font-mono); color: var(--muted); padding-top: 3px; }
+.panel h2 { font-size: 1.3rem; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.star { font-size: 1.5rem; line-height: 1; background: none; border: 0; cursor: pointer; color: var(--muted); padding: 2px 4px; border-radius: 6px; }
+.star[aria-pressed="true"] { color: var(--mark); }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 10px; }
+.tag { font-size: .75rem; font-weight: 600; padding: 1px 9px; border-radius: 99px; border: 1px solid currentColor; }
+.tag.ring { color: var(--muted); }
+.panel ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.panel code { font-family: var(--font-mono); font-size: .85em; background: var(--soft); padding: 0 4px; border-radius: 4px; }
+.ref { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 3px; }
+.ref:hover { text-decoration-color: var(--fg); }
+.related { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.related .label, .nav .label { font-size: .78rem; color: var(--muted); }
+.nav { display: flex; justify-content: space-between; margin-top: 14px; }
+.nav button { font: inherit; font-size: .82rem; background: none; border: 1px solid var(--line); border-radius: 8px; padding: 3px 10px; color: var(--fg); cursor: pointer; }
+.intro p { margin: 0 0 10px; color: var(--muted); }
+.legend { display: grid; gap: 6px; margin: 0; }
+.legend div { display: grid; grid-template-columns: 5.5em 1fr; gap: 8px; font-size: .88rem; }
+.legend dt { font: 600 .8rem var(--font-mono); text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+.legend dd { margin: 0; color: var(--muted); }
+
+.marked-list { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; }
+.marked-list .items { display: flex; flex-wrap: wrap; gap: 6px; }
+.marked-list .empty { color: var(--muted); font-size: .88rem; margin: 0; }
+.mk { font: inherit; font-size: .85rem; display: inline-flex; gap: 6px; align-items: baseline; padding: 4px 11px; border-radius: 8px; border: 1px solid var(--line); background: var(--mark-soft); color: var(--fg); cursor: pointer; }
+.mk b { font-family: var(--font-mono); font-weight: 600; color: var(--mark); }
+.mk small { color: var(--muted); }
+footer { color: var(--muted); font-size: .78rem; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Technology Radar Vol.__VOLUME__</h1>
+      <p id="sub"></p>
+    </div>
+    <span class="sync" id="sync" data-state="loading" role="status">印を読み込み中…</span>
+  </header>
+
+  <section class="filters" aria-label="絞り込み">
+    <div class="row">
+      <input class="search" id="q" type="search" placeholder="名前や要約の言葉で探す (例: サンドボックス、MCP)" aria-label="検索">
+      <button class="chip star-only" id="only-marked" aria-pressed="false">★ 気になる項目のみ</button>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="row" id="q-chips"><span class="label">象限</span></div>
+    <div class="row" id="r-chips"><span class="label">リング</span></div>
+  </section>
+
+  <div class="layout">
+    <div class="radar-wrap"><svg id="radar" viewBox="-500 -500 1000 1000" role="group" aria-label="レーダー。点を選ぶと要約が出ます。"></svg></div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+
+  <section class="marked-list" aria-labelledby="marked-h">
+    <h2 id="marked-h">気になる項目</h2>
+    <div class="items" id="marked-items"></div>
+  </section>
+
+  <footer>出典: Thoughtworks Technology Radar Volume __VOLUME__。内容は second-brain の日本語要約から生成したもので、原文ではありません。点の位置はリングと象限だけを表し、PDF の配置とは違います。</footer>
+</div>
+
+<script>
+const DATA = /*__RADAR_DATA__*/null;
+const RINGS = [
+  { id: "adopt", label: "Adopt", desc: "業界として採用すべきだと強く考える。" },
+  { id: "trial", label: "Trial", desc: "追求する価値がある。リスクを許容できるプロジェクトで試す。" },
+  { id: "assess", label: "Assess", desc: "自社への影響を理解する目的で調べる価値がある。" },
+  { id: "caution", label: "Caution", desc: "慎重に進める。大きな懸念がある。" },
+];
+const RING_LABEL = Object.fromEntries(RINGS.map(r => [r.id, r.label]));
+const Q = Object.fromEntries(DATA.quadrants.map(q => [q.id, q]));
+const BY_N = Object.fromEntries(DATA.blips.map(b => [b.number, b]));
+const SVG = "http://www.w3.org/2000/svg";
+const STORE_KEY = "radar-vol-" + DATA.volume + "-marks";
+const DOC_ID = "radar-vol-" + DATA.volume;
+
+const state = { selected: null, quadrants: new Set(), rings: new Set(), onlyMarked: false, text: "", marks: {} };
+const $ = id => document.getElementById(id);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
+  }
+  for (const k of kids) n.append(k);
+  return n;
+};
+const svg = (tag, attrs = {}) => { const n = document.createElementNS(SVG, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); return n; };
+const qColor = id => `var(--q-${id})`;
+
+// ---------- レーダー ----------
+const blipNodes = {};
+function drawRadar() {
+  const root = $("radar"), R = DATA.radius;
+  for (const q of DATA.quadrants) {
+    const a0 = q.start * Math.PI / 180, a1 = (q.start + 90) * Math.PI / 180;
+    const p = (a) => `${(R * Math.cos(a)).toFixed(1)},${(-R * Math.sin(a)).toFixed(1)}`;
+    root.append(svg("path", { class: "sector", fill: qColor(q.id), d: `M0,0 L${p(a0)} A${R},${R} 0 0 0 ${p(a1)} Z` }));
+  }
+  for (const f of DATA.ringEdges.slice(1)) root.append(svg("circle", { class: "ring", r: f * R }));
+  root.append(svg("line", { class: "axis", x1: -R, y1: 0, x2: R, y2: 0 }), svg("line", { class: "axis", x1: 0, y1: -R, x2: 0, y2: R }));
+  RINGS.forEach((ring, i) => {
+    const mid = (DATA.ringEdges[i] + DATA.ringEdges[i + 1]) / 2 * R;
+    const t = svg("text", { class: "ring-label", x: 0, y: -mid + 5, "text-anchor": "middle" });
+    t.textContent = ring.label;
+    root.append(t);
+  });
+  const corners = { techniques: [-490, -470, "start"], platforms: [490, -470, "end"], tools: [-490, 488, "start"], "languages-and-frameworks": [490, 488, "end"] };
+  for (const q of DATA.quadrants) {
+    const [x, y, anchor] = corners[q.id] || [0, 0, "middle"];
+    const t = svg("text", { class: "q-label", x, y, "text-anchor": anchor, fill: qColor(q.id) });
+    t.textContent = q.label;
+    root.append(t);
+  }
+  for (const b of DATA.blips) {
+    const g = svg("g", { class: "blip", tabindex: 0, role: "button", "aria-label": `${b.number} ${b.name}`, transform: `translate(${b.x} ${b.y})` });
+    const title = svg("title"); title.textContent = `${b.number}. ${b.name} (${RING_LABEL[b.ring]})`;
+    g.append(title, svg("circle", { r: 12, fill: qColor(b.quadrant) }));
+    const t = svg("text", { "text-anchor": "middle", y: 3.8 }); t.textContent = b.number;
+    g.append(t);
+    g.addEventListener("click", () => select(b.number));
+    g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(b.number); } });
+    root.append(g);
+    blipNodes[b.number] = g;
+  }
+}
+
+// ---------- 絞り込み ----------
+function matches(b) {
+  if (state.quadrants.size && !state.quadrants.has(b.quadrant)) return false;
+  if (state.rings.size && !state.rings.has(b.ring)) return false;
+  if (state.onlyMarked && !state.marks[b.number]) return false;
+  if (state.text) {
+    const hay = (b.name + " " + b.text.map(s => s.map(x => typeof x === "string" ? x : (x.t || x.code)).join("")).join(" ")).toLowerCase();
+    if (!hay.includes(state.text)) return false;
+  }
+  return true;
+}
+const filtersActive = () => state.quadrants.size || state.rings.size || state.onlyMarked || state.text;
+
+function buildFilters() {
+  for (const q of DATA.quadrants) {
+    const c = el("button", { class: "chip", "aria-pressed": "false" }, el("span", { class: "sw", style: `background:${qColor(q.id)}` }), q.label);
+    c.addEventListener("click", () => toggleSet(state.quadrants, q.id, c));
+    $("q-chips").append(c);
+  }
+  for (const r of RINGS) {
+    const c = el("button", { class: "chip", "aria-pressed": "false" }, r.label);
+    c.addEventListener("click", () => toggleSet(state.rings, r.id, c));
+    $("r-chips").append(c);
+  }
+  $("only-marked").addEventListener("click", e => { state.onlyMarked = !state.onlyMarked; e.currentTarget.setAttribute("aria-pressed", state.onlyMarked); refresh(); });
+  let timer;
+  $("q").addEventListener("input", e => { clearTimeout(timer); timer = setTimeout(() => { state.text = e.target.value.trim().toLowerCase(); refresh(); }, 120); });
+}
+function toggleSet(set, id, chip) { set.has(id) ? set.delete(id) : set.add(id); chip.setAttribute("aria-pressed", set.has(id)); refresh(); }
+
+// ---------- 表示の更新 ----------
+function refresh() {
+  let shown = 0;
+  for (const b of DATA.blips) {
+    const g = blipNodes[b.number], ok = matches(b);
+    if (ok) shown++;
+    g.classList.toggle("dim", !ok);
+    g.classList.toggle("marked", !!state.marks[b.number]);
+    g.classList.toggle("selected", state.selected === b.number);
+  }
+  $("count").textContent = filtersActive() ? `${shown} / ${DATA.blips.length} 項目` : `${DATA.blips.length} 項目`;
+  renderPanel();
+  renderMarked();
+}
+
+function renderPanel() {
+  const panel = $("panel");
+  panel.replaceChildren();
+  const b = BY_N[state.selected];
+  if (!b) {
+    const legend = el("dl", { class: "legend" });
+    for (const r of RINGS) legend.append(el("div", {}, el("dt", {}, r.label), el("dd", {}, r.desc)));
+    panel.append(el("div", { class: "intro" },
+      el("h2", {}, "点を選ぶと要約が出ます"),
+      el("p", {}, "中心に近いほど推奨が強いリングです。☆ を押すと気になる項目として残り、レーダー上でオレンジになります。"),
+      legend));
+    return;
+  }
+  const marked = !!state.marks[b.number];
+  const star = el("button", { class: "star", "aria-pressed": marked, "aria-label": marked ? "気になる項目から外す" : "気になる項目にする", title: marked ? "気になる項目から外す" : "気になる項目にする" }, marked ? "★" : "☆");
+  star.addEventListener("click", () => toggleMark(b.number));
+  panel.append(
+    el("div", { class: "head" }, el("span", { class: "num" }, String(b.number).padStart(2, "0")), el("h2", {}, b.name), star),
+    el("div", { class: "tags" },
+      el("span", { class: "tag", style: `color:${qColor(b.quadrant)}` }, Q[b.quadrant].label),
+      el("span", { class: "tag ring" }, RING_LABEL[b.ring])));
+  const ul = el("ul");
+  for (const bullet of b.text) {
+    const li = el("li");
+    for (const s of bullet) {
+      if (typeof s === "string") li.append(s);
+      else if (s.code !== undefined) li.append(el("code", {}, s.code));
+      else li.append(el("button", { class: "ref", title: `${s.n}. ${BY_N[s.n].name}`, onclick: () => select(s.n) }, s.t));
+    }
+    ul.append(li);
+  }
+  panel.append(ul);
+  if (b.mentions.length) {
+    const rel = el("div", { class: "related" }, el("span", { class: "label" }, "関連:"));
+    for (const n of b.mentions) rel.append(el("button", { class: "chip", onclick: () => select(n) }, `${n} · ${BY_N[n].name}`));
+    panel.append(rel);
+  }
+  const prev = BY_N[b.number - 1], next = BY_N[b.number + 1];
+  panel.append(el("div", { class: "nav" },
+    prev ? el("button", { onclick: () => select(prev.number) }, `← ${prev.number}`) : el("span"),
+    next ? el("button", { onclick: () => select(next.number) }, `${next.number} →`) : el("span")));
+}
+
+function renderMarked() {
+  const box = $("marked-items");
+  box.replaceChildren();
+  const ns = Object.keys(state.marks).map(Number).filter(n => BY_N[n]).sort((a, b) => a - b);
+  if (!ns.length) { box.append(el("p", { class: "empty" }, "まだありません。項目を選んで ☆ を押すと、ここに並びます。")); return; }
+  for (const n of ns) {
+    const b = BY_N[n];
+    box.append(el("button", { class: "mk", onclick: () => select(n) }, el("b", {}, String(n)), b.name, el("small", {}, RING_LABEL[b.ring])));
+  }
+}
+
+function select(n) {
+  state.selected = n;
+  try { history.replaceState(null, "", "#b" + n); } catch (e) {}
+  refresh();
+  if (window.matchMedia("(max-width: 860px)").matches) $("panel").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ---------- 印の保存 ----------
+let ref = null, writing = false, pending = false;
+function setSync(kind, text) { const s = $("sync"); s.dataset.state = kind; s.textContent = text; }
+function saveLocal() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state.marks)); } catch (e) {} }
+function loadLocal() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { return {}; } }
+
+function toggleMark(n) {
+  const marks = { ...state.marks };
+  if (marks[n]) delete marks[n]; else marks[n] = new Date().toISOString().slice(0, 10);
+  state.marks = marks;
+  saveLocal();
+  refresh();
+  pushRemote();
+}
+function pushRemote() {
+  if (!ref) return;
+  if (writing) { pending = true; return; }
+  writing = true;
+  ref.set({ marks: state.marks, updatedAt: new Date().toISOString() })
+    .catch(() => setSync("warn", "同期に失敗しました。このブラウザーには残っています"))
+    .finally(() => { writing = false; if (pending) { pending = false; pushRemote(); } });
+}
+
+async function connect() {
+  if (!window.claude?.use) { setSync("local", "このブラウザーにだけ保存"); return; }
+  const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+  const id = user ? await user.id() : null;
+  if (!db || !id) { setSync("local", "このブラウザーにだけ保存"); return; }
+  ref = db.collection("data/users/" + id).doc(DOC_ID);
+  const timer = setTimeout(() => setSync("warn", "同期先に届きません。最新でない可能性があります"), 10000);
+  let first = true;
+  ref.onSnapshot(snap => {
+    if (!snap.metadata.fromCache) { clearTimeout(timer); setSync("synced", "PC 間で同期中"); }
+    if (snap.metadata.hasPendingWrites) return;
+    const remote = snap.exists ? (snap.data().marks || {}) : null;
+    if (first && !remote && Object.keys(state.marks).length) { first = false; pushRemote(); return; }
+    first = false;
+    if (remote) { state.marks = { ...remote }; saveLocal(); refresh(); }
+  }, () => { clearTimeout(timer); setSync("warn", "同期できません。このブラウザーにだけ保存します"); ref = null; });
+}
+
+// ---------- 起動 ----------
+$("sub").textContent = `Thoughtworks · ${DATA.date} · ${DATA.blips.length} 項目 · second-brain の日本語要約から生成`;
+state.marks = loadLocal();
+drawRadar();
+buildFilters();
+const fromHash = () => { const m = /^#b(\d+)$/.exec(location.hash); return m && BY_N[+m[1]] ? +m[1] : null; };
+state.selected = fromHash();
+window.addEventListener("hashchange", () => { const n = fromHash(); if (n && n !== state.selected) { state.selected = n; refresh(); } });
+refresh();
+connect().catch(() => setSync("local", "このブラウザーにだけ保存"));
+</script>
