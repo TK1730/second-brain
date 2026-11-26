@@ -138,6 +138,9 @@ const RINGS = [
   { id: "assess", label: "Assess", desc: "自社への影響を理解する目的で調べる価値がある。" },
   { id: "caution", label: "Caution", desc: "慎重に進める。大きな懸念がある。" },
 ];
+// 4 番目のリングは号によって Hold と呼ぶ。名前は要約の見出しに合わせる。
+for (const r of RINGS) r.label = (DATA.ringLabels && DATA.ringLabels[r.id]) || r.label;
+if (RINGS[3].label === "Hold") RINGS[3].desc = "今は進めない。新しく使い始めない。";
 const RING_LABEL = Object.fromEntries(RINGS.map(r => [r.id, r.label]));
 const Q = Object.fromEntries(DATA.quadrants.map(q => [q.id, q]));
 const BY_N = Object.fromEntries(DATA.blips.map(b => [b.number, b]));

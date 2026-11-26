@@ -23,7 +23,9 @@ QUADRANTS = [
     ("tools", "Tools", "tools", 180),
     ("languages-and-frameworks", "Languages & frameworks", "languages-and-frameworks", 270),
 ]
+# 4 番目のリングは号によって名前が違う (Vol.33 以前は Hold、以降は Caution)。
 RINGS = ["adopt", "trial", "assess", "caution"]
+RING_ALIASES = {"hold": "caution"}
 # 各リングの内側と外側の半径 (最外周を 1 とする)
 RING_EDGES = [0.0, 0.34, 0.6, 0.83, 1.0]
 RADIUS = 470  # SVG の座標系での最外周
@@ -31,10 +33,10 @@ DOT_SPACING = 25  # 点どうしの最小間隔 (SVG の単位)
 ANGLE_MARGIN = 4  # 象限の境界線からあける角度 (度)
 
 BLIP_HEADING = re.compile(r"^### (\d+)\. (.+)$")
-RING_HEADING = re.compile(r"^## (Adopt|Trial|Assess|Caution)\s*$")
+RING_HEADING = re.compile(r"^## (Adopt|Trial|Assess|Caution|Hold)\s*$")
 
 
-def parse_quadrant(path: Path, quadrant: str) -> list[dict]:
+def parse_quadrant(path: Path, quadrant: str, labels: dict[str, str]) -> list[dict]:
     """1 つの象限の要約を読み、項目の一覧を返す。"""
     blips: list[dict] = []
     ring = None
@@ -43,6 +45,9 @@ def parse_quadrant(path: Path, quadrant: str) -> list[dict]:
         if line.startswith("## "):
             match = RING_HEADING.match(line)
             ring = match.group(1).lower() if match else None
+            if ring in RING_ALIASES:
+                labels["caution"] = match.group(1)
+                ring = RING_ALIASES[ring]
             current = None
             continue
         match = BLIP_HEADING.match(line)
@@ -169,9 +174,10 @@ def main() -> int:
     parser.add_argument("--date", default="2026-11")
     args = parser.parse_args()
 
+    labels = {r: r.capitalize() for r in RINGS}
     blips: list[dict] = []
     for q_id, _, suffix, _ in QUADRANTS:
-        blips += parse_quadrant(find_quadrant_file(args.directory, suffix), q_id)
+        blips += parse_quadrant(find_quadrant_file(args.directory, suffix), q_id, labels)
     blips.sort(key=lambda b: b["number"])
     numbers = [b["number"] for b in blips]
     if numbers != list(range(1, len(blips) + 1)):
@@ -194,6 +200,7 @@ def main() -> int:
         "date": args.date,
         "radius": RADIUS,
         "ringEdges": RING_EDGES,
+        "ringLabels": labels,
         "quadrants": [{"id": q, "label": label, "start": start} for q, label, _, start in QUADRANTS],
         "blips": blips,
     }
